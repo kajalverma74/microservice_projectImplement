@@ -1,3 +1,6 @@
+📌 Microservices Architecture for Notification and User Service
+This project follows a microservices architecture where each service is independently managed and communicates using REST APIs and Kafka (for event-driven notifications).
+
 Order Service - Node.js API
 This is a Node.js Order Service API that handles order creation, sends email notifications using Nodemailer, and publishes order events to Kafka.
   *** Tech Stack
