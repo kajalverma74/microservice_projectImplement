@@ -2,35 +2,6 @@ const Order = require('../models/order.model');
 const axios = require('axios'); 
 const { sendNotification } = require('../service/kafkaProducer');
 
-
-// const createOrder = async (req, res) => {
-//     try {
-//         const { userId, product, quantity, totalPrice } = req.body;
-
-//         const newOrder = await Order.create({
-//             userId,
-//             product,
-//             quantity,
-//             totalPrice,
-//         });
-
-//         const userServiceUrl = 'http://localhost:3000/api/users'; 
-//         const userResponse = await axios.get(`${userServiceUrl}/${userId}`);
-//         const userData = userResponse.data;
-
-//         const response = {
-//             order: newOrder,
-//             user: userData,
-//         };
-
-//         res.status(201).json({ message: "order created successfully", response });
-//     } catch (error) {
-//         console.error('Error creating order:', error);
-//         res.status(500).json({ error: 'Failed to create order' });
-//     }
-// };
-
-
 const createOrder = async (req, res) => {
     try {
         const { userId, product, quantity, totalPrice } = req.body;
@@ -94,10 +65,8 @@ const getOrderById = async (req, res) => {
 const getOrdersByUser = async (req, res) => {
     try {
         const { userId } = req.params;
-
         // Fetch orders by userId
         const orders = await Order.findAll({ where: { userId } });
-
         res.json({ message: "Orders fetched successfully", orders });
     } catch (error) {
         console.error('Error fetching orders:', error);
