@@ -1,8 +1,10 @@
-const express = require('express');
-const sequelize = require('./config/database'); 
-const userRoutes = require('./routes/userRoute');
-const customerRoutes = require('./routes/customerRoute');
-const employeeRoutes = require('./routes/employeeRoutes');
+const express = require("express");
+const sequelize = require("./config/database");
+const userRoutes = require("./routes/userRoute");
+const customerRoutes = require("./routes/customerRoute");
+const employeeRoutes = require("./routes/employeeRoutes");
+
+const authRoutes = require("./routes/authRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -10,20 +12,22 @@ const PORT = process.env.PORT || 4000;
 app.use(express.json());
 
 // Routes
-app.use('/api', userRoutes);
-app.use('/api', customerRoutes);
-app.use('/api', employeeRoutes); 
+app.use("/api", userRoutes);
+app.use("/api", customerRoutes);
+app.use("/api", employeeRoutes);
 
+app.use("/api/auth", authRoutes);
 
 // Test database connection
-sequelize.authenticate()
-    .then(() => {
-        console.log('USER Database connected successfully.');
-    })
-    .catch((error) => {
-        console.error('Unable to connect to the database:', error);
-    });
+sequelize
+  .authenticate()
+  .then(() => {
+    console.log("USER Database connected successfully.");
+  })
+  .catch((error) => {
+    console.error("Unable to connect to the database:", error);
+  });
 
 app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });
